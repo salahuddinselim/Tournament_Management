@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Management System</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .player-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .player-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Team Management System</h1>
+        
+        <!-- Coach Section -->
+        <div class="section">
+            <h2>Coach Information</h2>
+            <div class="form-group">
+                <label for="coach-name">Name:</label>
+                <input type="text" id="coach-name" required>
+            </div>
+            <div class="form-group">
+                <label for="coach-username">Username (if available):</label>
+                <input type="text" id="coach-username">
+            </div>
+        </div>
+
+        <!-- Players Section -->
+        <div class="section">
+            <h2>Players Information</h2>
+            <div id="players-container" class="player-container">
+                <!-- Players will be added here dynamically -->
+            </div>
+            <div class="button-group">
+                <button class="add-btn" onclick="addPlayer()">Add Player</button>
+                <button class="submit-btn" onclick="submitTeam()">Submit Team</button>
+            </div>
+            <div id="error-message" class="error"></div>
+        </div>
+    </div>
+
+    <script>
+        let playerCount = 0;
+        const maxPlayers = 15;
+        const minPlayers = 13;
+
+        function addPlayer() {
+            if (playerCount >= maxPlayers) {
+                showError(`Maximum ${maxPlayers} players allowed`);
+                return;
+            }
+
+            playerCount++;
+            const playerDiv = document.createElement('div');
+            playerDiv.className = 'player-card';
+            playerDiv.innerHTML = `
+                <div class="form-group">
+                    <label>Player ${playerCount} Name:</label>
+                    <input type="text" class="player-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Username (if available):</label>
+                    <input type="text" class="player-username">
+                </div>
+                <button class="remove-btn" onclick="removePlayer(this)">Remove</button>
+            `;
+
+            document.getElementById('players-container').appendChild(playerDiv);
+            clearError();
+        }
+
+        function removePlayer(button) {
+            if (playerCount <= minPlayers) {
+                showError(`Minimum ${minPlayers} players required`);
+                return;
+            }
+
+            button.parentElement.remove();
+            playerCount--;
+            clearError();
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+        }
+
+        function clearError() {
+            document.getElementById('error-message').textContent = '';
+        }
+
+        function submitTeam() {
+            if (playerCount < minPlayers) {
+                showError(`Please add at least ${minPlayers} players`);
+                return;
+            }
+
+            // Collect all data
+            const teamData = {
+                coach: {
+                    name: document.getElementById('coach-name').value,
+                    username: document.getElementById('coach-username').value
+                },
+                players: []
+            };
+
+            const playerCards = document.getElementsByClassName('player-card');
+            for (let card of playerCards) {
+                teamData.players.push({
+                    name: card.querySelector('.player-name').value,
+                    username: card.querySelector('.player-username').value
+                });
+            }
+
+            // Validate required fields
+            if (!teamData.coach.name) {
+                showError('Coach name is required');
+                return;
+            }
+
+            for (let player of teamData.players) {
+                if (!player.name) {
+                    showError('All player names are required');
+                    return;
+                }
+            }
+
+            // Convert to JSON for sending to server
+            const jsonData = JSON.stringify(teamData);
+            
+            // Here you would typically send the data to your server
+            // For demonstration, we'll log it to console
+            console.log('Team data:', jsonData);
+            
+            // Sample AJAX request (uncomment and modify as needed)
+            /*
+            fetch('save_team.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Team saved successfully!');
+                } else {
+                    showError('Error saving team: ' + data.message);
+                }
+            })
+            .catch(error => {
+                showError('Error saving team: ' + error.message);
+            });
+            */
+        }
+
+        // Initialize with minimum required players
+        for (let i = 0; i < minPlayers; i++) {
+            addPlayer();
+        }
+    </script>
+</body>
+</html>
