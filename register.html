@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Colors CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href="css/versions.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- font family -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- end font family -->
+    <link rel="stylesheet" href="css/3dslider.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="js/3dslider.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body class="game_info" data-spy="scroll" data-target=".header">
+    <!-- LOADER -->
+    <!-- <div id="preloader">
+        <img class="preloader" src="images/loading-img.gif" alt="">
+    </div> -->
+    <!-- END LOADER -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="match.html">Match</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <form class="search-bar" action="#">
+            <input type="text" placeholder="Search" name="search">
+            <button type="submit"><i class="search-icon">🔍</i></button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <div class="image-section">
+            <img src="images/holden-baxter-OPImR4Sy1dg-unsplash.jpg" alt="Workout Image">
+        </div>
+        <div class="form-section">
+            <h1>Create an Account</h1>
+            <p>Join the platform and get started now.</p>
+            <form action="register_submit.php" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="text" name="fullname" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="E-mail Address" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+                <div class="password-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required
+                        style="width: 100%; padding: 15px;"> <!-- Increased padding for larger size -->
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                </div>
+                <button type="submit">Register</button>
+                <button type="button" onclick="window.location.href='login.html'">Back to Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+
+</html>

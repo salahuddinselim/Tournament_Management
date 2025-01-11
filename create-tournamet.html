@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Tournament</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/custom.css"> <!-- Custom CSS added -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="logo">
+                            <a href="index.html"><img src="images/logo.png" alt="Logo" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="social-icons pull-left">
+                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
+                            <li><a class="pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-5">
+        <h2>Add Tournament Information</h2>
+        <form>
+            <div class="form-group">
+                <label for="tournamentName">Tournament Name:</label>
+                <input type="text" class="form-control" id="tournamentName" required>
+            </div>
+            <div class="form-group">
+                <label for="tournamentVenue">Tournament Venue:</label>
+                <input type="text" class="form-control" id="tournamentVenue" required>
+            </div>
+            <div class="form-group">
+                <label for="tournamentRegion">Tournament Region:</label>
+                <select class="form-control" id="tournamentRegion" required>
+                    <option value="">Select Region</option>
+                    <option value="region1" id="dhk">Dhaka</option>
+                    <option value="region2" id="cht" >Chattogram</option>
+                    <option value="region3" id="raj">Rajshahi</option>
+                    <option value="region4" id="brs">Barishal</option>
+                    <option value="region5" id="khl">Khulna</option>
+                    <option value="region6" id="syl">Sylhet</option>
+                    <option value="region7" id="mys">Mymensingh</option>
+                    <option value="region8" id="rang">Rangpur</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="totalTeams">Total Teams:</label>
+                <input type="number" class="form-control" id="totalTeams" min="4" required>
+            </div>
+            <div class="form-group">
+                <label for="startTime">Start Time:</label>
+                <input type="datetime-local" class="form-control" id="startTime" required>
+            </div>
+            <div class="form-group">
+                <label for="endTime">End Time:</label>
+                <input type="datetime-local" class="form-control" id="endTime" required>
+            </div>
+
+            <h4>Add Manager IDs:</h4>
+            <div id="managerIds">
+                <input type="text" class="form-control mb-2" placeholder="Manager ID 1">
+                <input type="text" class="form-control mb-2" placeholder="Manager ID 2">
+            </div>
+            <button type="button" class="btn btn-primary" id="addManagers">Add Manager</button>
+            <br>
+            <br>
+            <h4>Add Officials:</h4>
+            <div id="officials">
+                <input type="text" class="form-control mb-2" placeholder="Official 1">
+                <input type="text" class="form-control mb-2" placeholder="Official 2">
+            </div>
+            <button type="button" class="btn btn-primary" id="addOfficials">Add Official</button>
+
+            <button type="submit" class="btn btn-success mt-3">Save Tournament</button>
+        </form>
+    </div>
+
+    <script>
+        let managerCount = 2; // Start with 2 managers already present
+        document.getElementById('addManagers').addEventListener('click', function() {
+            var totalTeams = parseInt(document.getElementById('totalTeams').value);
+            var managerIdsDiv = document.getElementById('managerIds');
+            if (managerCount < totalTeams) {
+                var newManagerInput = document.createElement('input');
+                newManagerInput.type = 'text';
+                newManagerInput.className = 'form-control mb-2';
+                newManagerInput.placeholder = 'Manager ID ' + (managerCount + 1);
+                managerIdsDiv.appendChild(newManagerInput);
+                managerCount++;
+            } else {
+                alert("Maximum number of managers reached.");
+            }
+        });
+
+        document.getElementById('addOfficials').addEventListener('click', function() {
+            var officialsDiv = document.getElementById('officials');
+            if (officialsDiv.children.length < 5) { // Allow adding up to 5 officials
+                var newOfficialInput = document.createElement('input');
+                newOfficialInput.type = 'text';
+                newOfficialInput.className = 'form-control mb-2';
+                newOfficialInput.placeholder = 'Official ' + (officialsDiv.children.length + 1);
+                officialsDiv.appendChild(newOfficialInput);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Colors CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href="css/versions.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- font family -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- end font family -->
+    <link rel="stylesheet" href="css/3dslider.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/3dslider.js"></script>
+</head>
+<body class="game_info" data-spy="scroll" data-target=".header">
+    <!-- LOADER -->
+    <div id="preloader">
+        <img class="preloader" src="images/loading-img.gif" alt="Loading...">
+    </div>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="match.html">Match</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <form class="search-bar" action="#">
+            <input type="text" placeholder="Search" name="search">
+            <button type="submit"><i class="search-icon">🔍</i></button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <div class="image-section">
+            <img src="images/holden-baxter-OPImR4Sy1dg-unsplash.jpg" alt="Workout Image"> <!-- Updated image path -->
+        </div>
+        <div class="form-section">
+            <h1 style="font-family: 'Poppins', sans-serif;">Get more things done with Login platform.</h1> <!-- Updated font -->
+            <p style="font-family: 'Poppins', sans-serif;">Access to the most powerful tool in the entire design and web industry.</p> <!-- Updated font -->
+            <form action="login.php" method="POST">
+                <input type="email" name="email" placeholder="E-mail Address" required>
+                <div class="password-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required style="width: 100%; padding: 15px;"> <!-- Increased padding for larger size -->
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                </div>
+                <button type="submit">Login</button>
+                <button type="button" onclick="window.location.href='register.html'">Create account</button>
+                <a href="forgot_password.php" class="forgot-password">Forgot Password?</a> <!-- Added Forgot Password -->
+            </form>
+            <p style="font-family: 'Poppins', sans-serif;">Or login with</p> 
+            <!-- Updated font -->
+            <div class="social-icons pull-left">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.toggle-password');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+
+        // Preloader script
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.display = 'none';
+        });
+    </script>
+
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="full">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="#"><img src="images/footer-logo.png" alt="#" /></a>
+                            </div>
+                            <p>Most of our events have hard and easy route choices as we are always keen to encourage new riders.</p>
+                            <ul class="social-icons pull-left">
+                                <li><a class="facebook" href="https://www.facebook.com/your-profile"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="https://www.twitter.com/your-profile"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="youtube" href="https://www.youtube.com/channel/your-channel-id"><i class="fa fa-youtube-play"></i></a></li>
+                                <li><a class="pinterest" href="https://www.pinterest.com/your-profile"><i class="fa fa-pinterest-p"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="full">
+                        <div class="footer-widget">
+                            <h3>Menu</h3>
+                            <ul class="footer-menu">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="team.html">Our Team</a></li>
+                                <li><a href="news.html">Latest News</a></li>
+                                <li><a href="matche.html">Recent Matchs</a></li>
+                                <li><a href="blog.html">Our Blog</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="full">
+                        <div class="footer-widget">
+                            <h3>Contact us</h3>
+                            <ul class="address-list">
+                                <li><i class="fa fa-map-marker"></i> Lorem Ipsum is simply dummy text of the printing..</li>
+                                <li><i class="fa fa-phone"></i> 123 456 7890</li>
+                                <li><i style="font-size:20px;top:5px;" class="fa fa-envelope"></i> demo@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="full">
+                        <div class="contact-footer">
+                            <div id="map-container">
+                                <div id="location-fallback">
+                                    <p>Location Services</p>
+                                    <button onclick="getCurrentLocation()">Get My Location</button>
+                                </div>
+                                <iframe id="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14604.194640483276!2d90.42548909999998!3d23.7812815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m3!3e6!4m0!4m0!5e0!3m2!1sen!2sbd!4v1736533084601!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="600" height="350" frameborder="0" style="border:0; display:block;" allowfullscreen></iframe>
+                                <p id="location-message"></p>
+                            </div>
+                            <script>
+                            function getCurrentLocation() {
+                                if ("geolocation" in navigator) {
+                                    navigator.geolocation.getCurrentPosition(function(position) {
+                                        const latitude = position.coords.latitude;
+                                        const longitude = position.coords.longitude;
+                                        
+                                        // Update location message
+                                        document.getElementById('location-message').textContent = 
+                                            `Your current location: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+                                        
+                                        // Update Google Maps iframe src with coordinates
+                                        const mapIframe = document.getElementById('google-map');
+                                        mapIframe.src = `https://www.google.com/maps/embed/v1/view?key=&center=${latitude},${longitude}&zoom=15&maptype=roadmap`;
+                                    }, function(error) {
+                                        // Handle geolocation errors
+                                        let errorMessage = '';
+                                        switch(error.code) {
+                                            case error.PERMISSION_DENIED:
+                                                errorMessage = "Location access denied. Please enable location permissions.";
+                                                break;
+                                            case error.POSITION_UNAVAILABLE:
+                                                errorMessage = "Location information is unavailable.";
+                                                break;
+                                            case error.TIMEOUT:
+                                                errorMessage = "Location request timed out.";
+                                                break;
+                                            case error.UNKNOWN_ERROR:
+                                                errorMessage = "An unknown error occurred.";
+                                                break;
+                                        }
+                                        document.getElementById('location-message').textContent = errorMessage;
+                                    });
+                                } else {
+                                    document.getElementById('location-message').textContent = 
+                                        "Geolocation is not supported by this browser.";
+                                }
+                            }
+                            </script>
+                            <style>
+                            #map-container {
+                                text-align: center;
+                            }
+                            #location-fallback {
+                                margin-bottom: 10px;
+                            }
+                            #location-message {
+                                margin-top: 10px;
+                                font-style: italic;
+                            }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>Copyright &copy; 2018 Distributed by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

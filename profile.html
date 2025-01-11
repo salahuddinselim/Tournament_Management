@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Colors CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <!-- ALL VERSION CSS -->
+    <link rel="stylesheet" href="css/versions.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- font family -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- end font family -->
+    <link rel="stylesheet" href="css/3dslider.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="js/3dslider.js"></script>
+    <link rel="stylesheet" href="css/profile.css">
+    <title>User Profile</title>
+</head>
+
+<body class="game_info" data-spy="scroll" data-target=".header">
+    <!-- LOADER -->
+    <!-- <div id="preloader">
+        <img class="preloader" src="images/loading-img.gif" alt="">
+    </div> -->
+    <!-- END LOADER -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo">
+                <h1>GAME INFO</h1>
+                <p>Gaming Community</p>
+            </div>
+        </div>
+        <div class="menu-section">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="match.html">Import Match</a></li>
+                <li><a href="blog.html">Our Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-picture">
+                <div class="initials">
+                    <?php echo substr($user['fullname'], 0, 2); ?>
+                </div>
+            </div>
+            <h1>
+                <?php echo $user['fullname']; ?>
+            </h1>
+            <p>Sports Enthusiast | Member since
+                <?php echo date("Y", strtotime($user['member_since'])); ?>
+            </p>
+            <a href="edit_profile.php" class="button">Edit Profile</a>
+            <?php if ($user['role'] == 'organiser') { ?>
+            <a href="edit_tournament.php" class="button">Edit Tournament</a>
+            <?php } elseif ($user['role'] == 'manager') { ?>
+            <a href="add_player.php" class="button">Add Player</a>
+            <?php } ?>
+        </div>
+        <div class="profile-stats">
+            <div class="stat">
+                <h2>
+                    <?php echo $user['tournaments']; ?>
+                </h2>
+                <p>No. of Tournament</p>
+            </div>
+            <div class="stat">
+                <h2>
+                    <?php echo $user['matches']; ?>
+                </h2>
+                <p>Matches</p>
+            </div>
+            <div class="stat">
+                <h2>
+                    <?php echo $user['teams']; ?>
+                </h2>
+                <p>Team</p>
+            </div>
+            <div class="stat">
+                <h2>
+                    <?php echo $user['teams']; ?>
+                </h2>
+                <p>Sport</p>
+            </div>
+        </div>
+        <div class="profile-info">
+            <h3>Profile Information</h3>
+            <p><strong>Username:</strong>
+                <?php echo $user['username']; ?>
+            </p>
+            <p><strong>Email:</strong>
+                <?php echo $user['email']; ?>
+            </p>
+            <p><strong>Phone:</strong>
+                <?php echo $user['phone']; ?>
+            </p>
+            <p><strong>Member Since:</strong>
+                <?php echo date("F j, Y", strtotime($user['member_since'])); ?>
+            </p>
+        </div>
+        <div class="recent-activity">
+            <h3>Recent Activity</h3>
+            <p>
+                <?php echo $user['recent_activity']; ?>
+            </p>
+        </div>
+        <div class="actions">
+            <button onclick="createTournament()">Create Tournament</button>
+            <button onclick="showNotifications()">Notifications</button>
+        </div>
+    </div>
+
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>For inquiries, reach us at:</p>
+        <p>(123) 456 7890</p>
+        <p>demo@gmail.com</p>
+    </div>
+
+    <script>
+        function editProfile() {
+            // Redirect to edit profile page
+            window.location.href = 'edit_profile.php';
+        }
+
+        function editTournament() {
+            // Check user role before redirecting
+            fetch('check_role.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.role === 'organiser') {
+                        window.location.href = 'edit_tournament.php';
+                    } else {
+                        alert('You do not have permission to edit tournaments.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking role:', error);
+                    alert('An error occurred while checking your role.');
+                });
+        }
+
+        function addPlayer() {
+            // Check user role before redirecting
+            fetch('check_role.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.role === 'manager') {
+                        window.location.href = 'add_player.php';
+                    } else {
+                        alert('You do not have permission to add players.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking role:', error);
+                    alert('An error occurred while checking your role.');
+                });
+        }
+
+        function createTournament() {
+            // Redirect to create tournament page
+            window.location.href = 'create_tournament.php';
+        }
+
+        function showNotifications() {
+            // Fetch and display notifications
+            fetch('get_notifications.php')
+                .then(response => response.json())
+                .then(notifications => {
+                    if (notifications.length === 0) {
+                        alert('No new notifications.');
+                        return;
+                    }
+
+                    // Create a modal or dropdown to show notifications
+                    const notificationContainer = document.createElement('div');
+                    notificationContainer.className = 'notification-modal';
+                    notificationContainer.innerHTML = `
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
+                            <button onclick="this.parentElement.parentElement.remove()">Close</button>
+                        </div>
+                        <div class="notification-list">
+                            ${notifications.map(notification => `
+                                <div class="notification-item">
+                                    <p>${notification.message}</p>
+                                    <small>${notification.timestamp}</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+
+                    // Append to body and style it
+                    document.body.appendChild(notificationContainer);
+                    
+                    // Add some basic CSS for the notification modal
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .notification-modal {
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            background-color: white;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                            max-width: 400px;
+                            width: 100%;
+                            max-height: 500px;
+                            overflow-y: auto;
+                            z-index: 1000;
+                        }
+                        .notification-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 10px;
+                            border-bottom: 1px solid #eee;
+                        }
+                        .notification-list {
+                            padding: 10px;
+                        }
+                        .notification-item {
+                            margin-bottom: 10px;
+                            padding: 10px;
+                            background-color: #f9f9f9;
+                            border-radius: 4px;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                })
+                .catch(error => {
+                    console.error('Error fetching notifications:', error);
+                    alert('An error occurred while fetching notifications.');
+                });
+        }
+    </script>
+</body>
+
+</html>
