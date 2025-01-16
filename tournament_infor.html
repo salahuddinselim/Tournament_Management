@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+   <!-- Basic -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <!-- Mobile Metas -->
+   <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <!-- Site Metas -->
+   <title>Tournament Information</title>
+   <meta name="keywords" content="">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <!-- Site Icons -->
+   <link rel="shortcut icon" href="" type="image/x-icon" />
+   <link rel="apple-touch-icon" href="">
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <!-- Site CSS -->
+   <link rel="stylesheet" href="style.css">
+   <!-- Colors CSS -->
+   <link rel="stylesheet" href="css/colors.css">
+   <!-- ALL VERSION CSS -->	
+   <link rel="stylesheet" href="css/versions.css">
+   <!-- Responsive CSS -->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="css/custom.css">
+   <!-- font family -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+   <!-- end font family -->
+   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <style>
+      .team-card {
+         cursor: pointer;
+         transition: transform 0.3s;
+      }
+      .team-card:hover {
+         transform: scale(1.05);
+      }
+      #playerModal {
+         display: none;
+         position: fixed;
+         z-index: 1000;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         overflow: auto;
+         background-color: rgba(0,0,0,0.4);
+      }
+      .modal-content {
+         background-color: #fefefe;
+         margin: 15% auto;
+         padding: 20px;
+         border: 1px solid #888;
+         width: 80%;
+         max-width: 600px;
+      }
+      .close-modal {
+         color: #aaa;
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+         cursor: pointer;
+      }
+   </style>
+   </head>
+   <body class="game_info" data-spy="scroll" data-target=".header">
+      <section id="top">
+         <header>
+            <div class="container">
+               <div class="header-top">
+                  <div class="row">
+                     <div class="col-md-6">
+                        <div class="full">
+                           <div class="logo">
+                              <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="right_top_section">
+                           <!-- social icon -->
+                           <ul class="social-icons pull-left">
+                              <li><a class="facebook" href="https://www.facebook.com/your-profile"><i class="fa fa-facebook"></i></a></li>
+                              <li><a class="twitter" href="https://www.twitter.com/your-profile"><i class="fa fa-twitter"></i></a></li>
+                              <li><a class="youtube" href="https://www.youtube.com/channel/your-channel-id"><i class="fa fa-youtube-play"></i></a></li>
+                              <li><a class="pinterest" href="https://www.pinterest.com/your-profile"><i class="fa fa-pinterest-p"></i></a></li>
+                          </ul>
+                          
+                           <!-- end social icon -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="header-bottom">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="full">
+                           <div class="main-menu-section">
+                              <div class="menu">
+                                 <nav class="navbar navbar-inverse">
+                                    <div class="navbar-header">
+                                       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                                       <span class="sr-only">Toggle navigation</span>
+                                       <span class="icon-bar"></span>
+                                       <span class="icon-bar"></span>
+                                       <span class="icon-bar"></span>
+                                       </button>
+                                       <a class="navbar-brand" href="#">Menu</a>
+                                    </div>
+                                    <div class="collapse navbar-collapse js-navbar-collapse">
+                                       <ul class="nav navbar-nav">
+                                          <li><a href="index.html">Home</a></li>
+                                          <li><a href="about.html">About</a></li>
+                                          <li class="active"><a href="tournament_infor.html">Tournament</a></li>
+                                          <li><a href="team.html">Team</a></li>
+                                          <li><a href="news.html">News</a></li>
+                                       </ul>
+                                    </div>
+                                 </nav>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+      </section>
+
+      <section class="contant">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <h2 class="text-center mb-4">Tournament Teams</h2>
+                  <div id="teamContainer" class="row">
+                     <!-- Teams will be dynamically populated here -->
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Player Modal -->
+      <div id="playerModal" class="modal">
+         <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTeamName"></h2>
+            <div id="playerList"></div>
+         </div>
+      </div>
+
+      <footer id="footer" class="footer">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="full">
+                     <div class="footer-widget">
+                        <div class="footer-logo">
+                           <a href="#"><img src="images/footer-logo.png" alt="#" /></a>
+                        </div>
+                        <p>Tournament Management System</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="full">
+                     <div class="footer-widget">
+                        <h3>Contact us</h3>
+                        <ul class="footer-contact-list">
+                           <li><i class="fa fa-map-marker"></i> Location</li>
+                           <li><i class="fa fa-phone"></i> Call +01 1234567890</li>
+                           <li><i class="fa fa-envelope"></i> demo@gmail.com</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="full">
+                     <div class="footer-widget">
+                        <h3>Newsletter</h3>
+                        <div class="footer-subscribe">
+                           <form>
+                              <input type="text" placeholder="Enter your email">
+                              <button type="submit">Subscribe</button>
+                           </form>
+                        </div>
+                     </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+
+      <!-- Bootstrap and jQuery scripts -->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script>
+         $(document).ready(function() {
+            // Fetch teams from database
+            $.ajax({
+               url: 'fetch_teams.php',
+               method: 'GET',
+               dataType: 'json',
+               success: function(teams) {
+                  const teamContainer = $('#teamContainer');
+                  teams.forEach(team => {
+                     const teamCard = $(`
+                        <div class="col-md-4 mb-4">
+                           <div class="card team-card" data-team-id="${team.id}">
+                              <img src="${team.logo}" class="card-img-top" alt="${team.name}">
+                              <div class="card-body">
+                                 <h5 class="card-title">${team.name}</h5>
+                              </div>
+                           </div>
+                        </div>
+                     `);
+                     teamCard.on('click', function() {
+                        const teamId = $(this).data('team-id');
+                        fetchTeamPlayers(teamId);
+                     });
+                     teamContainer.append(teamCard);
+                  });
+               },
+               error: function() {
+                  alert('Failed to load teams');
+               }
+            });
+
+            // Function to fetch team players
+            function fetchTeamPlayers(teamId) {
+               $.ajax({
+                  url: 'fetch_team_players.php',
+                  method: 'GET',
+                  data: { team_id: teamId },
+                  dataType: 'json',
+                  success: function(players) {
+                     const playerList = $('#playerList');
+                     const modalTeamName = $('#modalTeamName');
+                     playerList.empty();
+
+                     modalTeamName.text(players[0].team_name);
+                     players.forEach(player => {
+                        const playerCard = $(`
+                           <div class="player-card mb-3">
+                              <h4>${player.name}</h4>
+                              <p>Position: ${player.position}</p>
+                              <p>Age: ${player.age}</p>
+                           </div>
+                        `);
+                        playerList.append(playerCard);
+                     });
+
+                     $('#playerModal').show();
+                  },
+                  error: function() {
+                     alert('Failed to load players');
+                  }
+               });
+            }
+
+            // Close modal functionality
+            $('.close-modal').on('click', function() {
+               $('#playerModal').hide();
+            });
+
+            // Close modal when clicking outside
+            $(window).on('click', function(event) {
+               const modal = $('#playerModal');
+               if (event.target === modal[0]) {
+                  modal.hide();
+               }
+            });
+         });
+      </script>
+   </body>
+</html>

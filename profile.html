@@ -68,11 +68,11 @@
             <p>Sports Enthusiast | Member since
                 <?php echo date("Y", strtotime($user['member_since'])); ?>
             </p>
-            <a href="edit_profile.php" class="button">Edit Profile</a>
+            <a href="edit_profile.html" class="button">Edit Profile</a>
             <?php if ($user['role'] == 'organiser') { ?>
-            <a href="edit_tournament.php" class="button">Edit Tournament</a>
+            <a href="edit_tournament.html" class="button">Edit Tournament</a>
             <?php } elseif ($user['role'] == 'manager') { ?>
-            <a href="add_player.php" class="button">Add Player</a>
+            <a href="add_player.html" class="button">Add Player</a>
             <?php } ?>
         </div>
         <div class="profile-stats">
@@ -138,16 +138,16 @@
     <script>
         function editProfile() {
             // Redirect to edit profile page
-            window.location.href = 'edit_profile.php';
+            window.location.href = 'edit_profile.html';
         }
 
         function editTournament() {
             // Check user role before redirecting
-            fetch('check_role.php')
+            fetch('check_role.html')
                 .then(response => response.json())
                 .then(data => {
                     if (data.role === 'organiser') {
-                        window.location.href = 'edit_tournament.php';
+                        window.location.href = 'edit_tournament.html';
                     } else {
                         alert('You do not have permission to edit tournaments.');
                     }
@@ -160,11 +160,11 @@
 
         function addPlayer() {
             // Check user role before redirecting
-            fetch('check_role.php')
+            fetch('check_role.html')
                 .then(response => response.json())
                 .then(data => {
                     if (data.role === 'manager') {
-                        window.location.href = 'add_player.php';
+                        window.location.href = 'add_player.html';
                     } else {
                         alert('You do not have permission to add players.');
                     }
@@ -177,12 +177,12 @@
 
         function createTournament() {
             // Redirect to create tournament page
-            window.location.href = 'create_tournament.php';
+            window.location.href = 'create-tournament.html';
         }
 
         function showNotifications() {
             // Fetch and display notifications
-            fetch('get_notifications.php')
+            fetch('get_notifications.html')
                 .then(response => response.json())
                 .then(notifications => {
                     if (notifications.length === 0) {
